@@ -10,12 +10,12 @@ class Client(socketbase.SocketBase):
         self.my_ip = self.get_my_ip()
         self.ips_not_mine = self.get_ips_not_mine(self.my_ip)
 
-    def run(self, port: int):
+    def run(self, port: int, result: []):
 
         # wait for servers to start successfully
-        time.sleep(secs=60)
+        time.sleep(60)
 
-        all_data = []
+        result = []
         sock = socket.socket(self.SOCKET_TYPE["family"], self.SOCKET_TYPE["type"])
         sock.settimeout(self.TIMEOUT)
 
@@ -27,11 +27,11 @@ class Client(socketbase.SocketBase):
                 data_bytes = sock.recv(self.PAYLOAD_SIZE_BYTES)
                 data_int = 0
                 data_int.from_bytes(data_bytes, self.BYTEORDER)
-                all_data.append(data_int)
+                result.append(data_int)
 
             finally:
                 pass
 
             sock.close()
 
-        return all_data
+        # result returned through "result" reference variable
