@@ -30,7 +30,7 @@ class Client(socketbase.SocketBase):
                     # successfully exit loop
                     break
 
-                finally:
+                except ConnectionError:
                     pass
 
             sock.close()
