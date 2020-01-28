@@ -25,9 +25,6 @@ class Server(socketbase.SocketBase):
 
         for client_id in range(0, self.number_clients):
             connection, client_address = sock.accept()
-            connections.append(connection)
-
-        for connection in connections:
 
             try:
                 connection.sendall(data)

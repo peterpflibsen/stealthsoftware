@@ -21,7 +21,11 @@ class Client(socketbase.SocketBase):
             while True:
                 try:
                     sock.connect(server_address)
-                    data_bytes = sock.recv(self.PAYLOAD_SIZE_BYTES, socket.MSG_WAITALL)
+                    data_bytes = bytes()
+
+                    while len(data_bytes < self.PAYLOAD_SIZE_BYTES):
+                        data_bytes += sock.recv(self.PAYLOAD_SIZE_BYTES)
+
                     data_int = 0
                     data_int = data_int.from_bytes(data_bytes, byteorder=self.BYTEORDER)
                     result.append(data_int)
