@@ -21,9 +21,14 @@ class Server(socketbase.SocketBase):
 
         data = value.to_bytes(self.PAYLOAD_SIZE_BYTES, self.BYTEORDER)
 
-        for client_id in range(0, self.number_clients):
+        connections = []
 
+        for client_id in range(0, self.number_clients):
             connection, client_address = sock.accept()
+            connections.append(connection)
+
+        for connection in connections:
+
             try:
                 connection.sendall(data)
             finally:
