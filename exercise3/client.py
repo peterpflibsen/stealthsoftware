@@ -12,7 +12,6 @@ class Client(socketbase.SocketBase):
 
     def run(self, port: int, result: []):
 
-        result = []
         sock = socket.socket(self.SOCKET_TYPE["family"], self.SOCKET_TYPE["type"])
         sock.settimeout(self.TIMEOUT)
 
