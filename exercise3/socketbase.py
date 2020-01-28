@@ -31,7 +31,7 @@ class SocketBase:
         return IP
 
     def get_ips_not_mine(self, my_ip):
-        ips_not_mine = self.HARDCODED_IPS
+        ips_not_mine = self.HARDCODED_IPS.copy()
 
         for ip in ips_not_mine:
             if ip == my_ip:
