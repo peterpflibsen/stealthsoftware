@@ -29,3 +29,5 @@ class Server(socketbase.SocketBase):
                 pass
 
             connection.close()
+
+        sock.close()

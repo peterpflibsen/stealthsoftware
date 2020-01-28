@@ -33,6 +33,6 @@ class Client(socketbase.SocketBase):
                 except ConnectionError:
                     pass
 
-            sock.close()
+        sock.close()
 
         # result returned through "result" reference variable
