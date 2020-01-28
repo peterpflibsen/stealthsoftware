@@ -26,8 +26,6 @@ class SocketBase:
         finally:
             s.close()
 
-        print("My IP:" + str(IP))
-
         return IP
 
     def get_ips_not_mine(self, my_ip):
@@ -36,8 +34,6 @@ class SocketBase:
         for ip in ips_not_mine:
             if ip == my_ip:
                 ips_not_mine.remove(ip)
-
-        print("Other ips:" + str(ips_not_mine))
 
         return ips_not_mine
 
