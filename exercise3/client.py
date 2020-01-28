@@ -12,14 +12,14 @@ class Client(socketbase.SocketBase):
 
     def run(self, port: int, result: []):
 
-        sock = socket.socket(self.SOCKET_TYPE["family"], self.SOCKET_TYPE["type"])
-        sock.settimeout(self.TIMEOUT)
-
         for server_ip in self.ips_not_mine:
             server_address = (server_ip, port)
 
             while True:
                 try:
+                    sock = socket.socket(self.SOCKET_TYPE["family"], self.SOCKET_TYPE["type"])
+                    sock.settimeout(self.TIMEOUT)
+
                     sock.connect(server_address)
                     data_bytes = bytes()
 
@@ -30,12 +30,12 @@ class Client(socketbase.SocketBase):
                     data_int = data_int.from_bytes(data_bytes, byteorder=self.BYTEORDER)
                     result.append(data_int)
 
+                    sock.close()
+
                     # successfully exit loop
                     break
 
                 except ConnectionError:
                     pass
-
-        sock.close()
 
         # result returned through "result" reference variable
