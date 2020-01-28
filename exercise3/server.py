@@ -12,6 +12,7 @@ class Server(socketbase.SocketBase):
 
     def run(self, value: int, port: int):
         sock = socket.socket(self.SOCKET_TYPE["family"], self.SOCKET_TYPE["type"])
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR)
         sock.settimeout(self.TIMEOUT)
 
         server_address = (self.my_ip, port)

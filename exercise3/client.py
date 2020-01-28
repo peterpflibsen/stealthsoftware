@@ -23,7 +23,7 @@ class Client(socketbase.SocketBase):
                     sock.connect(server_address)
                     data_bytes = sock.recv(self.PAYLOAD_SIZE_BYTES)
                     data_int = 0
-                    data_int.from_bytes(data_bytes, self.BYTEORDER)
+                    data_int = data_int.from_bytes(data_bytes, byteorder=self.BYTEORDER)
                     result.append(data_int)
 
                     # successfully exit loop
