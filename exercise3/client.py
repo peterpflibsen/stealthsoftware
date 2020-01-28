@@ -12,9 +12,6 @@ class Client(socketbase.SocketBase):
 
     def run(self, port: int, result: []):
 
-        # wait for servers to start successfully
-        time.sleep(60)
-
         result = []
         sock = socket.socket(self.SOCKET_TYPE["family"], self.SOCKET_TYPE["type"])
         sock.settimeout(self.TIMEOUT)
@@ -22,15 +19,19 @@ class Client(socketbase.SocketBase):
         for server_ip in self.ips_not_mine:
             server_address = (server_ip, port)
 
-            try:
-                sock.connect(server_address)
-                data_bytes = sock.recv(self.PAYLOAD_SIZE_BYTES)
-                data_int = 0
-                data_int.from_bytes(data_bytes, self.BYTEORDER)
-                result.append(data_int)
+            while True:
+                try:
+                    sock.connect(server_address)
+                    data_bytes = sock.recv(self.PAYLOAD_SIZE_BYTES)
+                    data_int = 0
+                    data_int.from_bytes(data_bytes, self.BYTEORDER)
+                    result.append(data_int)
 
-            finally:
-                pass
+                    # successfully exit loop
+                    break
+
+                finally:
+                    pass
 
             sock.close()
 

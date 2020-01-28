@@ -10,9 +10,8 @@ class SocketBase:
 
     TIMEOUT = 300
 
-    HARDCODED_IPS = ['10.0.1.50',
-                     '10.0.1.192',
-                     '10.0.1.193']
+    HARDCODED_IPS = ['10.0.1.233',
+                     '10.0.1.192']
     ips_not_mine = []
 
     @staticmethod
