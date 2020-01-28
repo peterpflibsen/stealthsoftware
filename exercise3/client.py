@@ -23,7 +23,7 @@ class Client(socketbase.SocketBase):
                     sock.connect(server_address)
                     data_bytes = bytes()
 
-                    while len(data_bytes < self.PAYLOAD_SIZE_BYTES):
+                    while len(data_bytes) < self.PAYLOAD_SIZE_BYTES:
                         data_bytes += sock.recv(self.PAYLOAD_SIZE_BYTES)
 
                     data_int = 0
